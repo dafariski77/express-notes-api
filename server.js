@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const endpoint = require("./src/routes/route");
+const serverless = require("serverless-http");
 require("dotenv").config();
 
 const app = express();
@@ -21,6 +22,8 @@ app.use(cors());
 app.use(express.json());
 
 // use user endpoint
-app.use(endpoint);
+app.use(`/.netlify/functions/api`, endpoint);
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}!`));
+// Export the app and the serverless function
+module.exports = app;
+module.exports.handler = serverless(app);
