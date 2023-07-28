@@ -21,6 +21,6 @@ app.use(cors());
 app.use(express.json());
 
 // use user endpoint
-app.use(`/.netlify/functions/api`, endpoint);
+app.use(endpoint);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}!`));
